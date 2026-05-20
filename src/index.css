@@ -1,0 +1,678 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Atlas - Premium Dark Fintech Design System */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+@layer base {
+  :root {
+    /* Dark theme - default */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 173 80% 50%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 222 30% 12%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 173 60% 40%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 30% 16%;
+    --input: 210 40% 98.0392%;
+    --ring: 173 80% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom Atlas colors */
+    --atlas-bg-deep: 222 47% 4%;
+    --atlas-surface: 222 47% 10%;
+    --atlas-surface-hover: 222 47% 14%;
+
+    --atlas-income: 158 72% 45%;
+    --atlas-income-light: 158 72% 55%;
+
+    --atlas-expense: 0 72% 55%;
+    --atlas-expense-light: 0 72% 65%;
+
+    --atlas-cyan: 173 80% 50%;
+    --atlas-cyan-glow: 173 80% 60%;
+
+    --atlas-purple: 265 72% 55%;
+    --atlas-orange: 25 95% 53%;
+    --atlas-yellow: 45 93% 47%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(173, 80%, 50%), hsl(173, 80%, 40%));
+    --gradient-income: linear-gradient(135deg, hsl(158, 72%, 45%), hsl(158, 72%, 35%));
+    --gradient-expense: linear-gradient(135deg, hsl(0, 72%, 55%), hsl(0, 72%, 45%));
+    --gradient-card: linear-gradient(180deg, hsl(222, 47%, 10%) 0%, hsl(222, 47%, 8%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(173, 80%, 50%, 0.15) 0%, transparent 70%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px hsl(222, 47%, 4%, 0.4);
+    --shadow-md: 0 4px 16px hsl(222, 47%, 4%, 0.5);
+    --shadow-lg: 0 8px 32px hsl(222, 47%, 4%, 0.6);
+    --shadow-glow: 0 0 40px hsl(173, 80%, 50%, 0.15);
+    --shadow-income: 0 4px 20px hsl(158, 72%, 45%, 0.2);
+    --shadow-expense: 0 4px 20px hsl(0, 72%, 55%, 0.2);
+
+    /* Sidebar */
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 210 40% 85%;
+    --sidebar-primary: 173 80% 50%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 222 30% 14%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 30% 12%;
+    --sidebar-ring: 173 80% 50%;
+    --font-sans: Montserrat, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    --font-serif: "Crimson Text", ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
+  }
+
+  .light {
+    --background: 220 20% 97%;
+    --foreground: 224 30% 16%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 30% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 30% 16%;
+
+    --primary: 173 80% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 92%;
+    --secondary-foreground: 224 30% 16%;
+
+    --muted: 220 14% 94%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 173 60% 35%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 87%;
+    --input: 224 30% 16%;
+    --ring: 173 80% 40%;
+
+    /* Custom Atlas colors - light */
+    --atlas-bg-deep: 220 20% 95%;
+    --atlas-surface: 220 14% 94%;
+    --atlas-surface-hover: 220 14% 89%;
+
+    --atlas-income: 158 72% 38%;
+    --atlas-income-light: 158 72% 30%;
+
+    --atlas-expense: 0 72% 50%;
+    --atlas-expense-light: 0 72% 42%;
+
+    --atlas-cyan: 173 80% 40%;
+    --atlas-cyan-glow: 173 80% 50%;
+
+    --atlas-purple: 265 72% 50%;
+    --atlas-orange: 25 95% 48%;
+    --atlas-yellow: 45 93% 42%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(173, 80%, 40%), hsl(173, 80%, 30%));
+    --gradient-income: linear-gradient(135deg, hsl(158, 72%, 38%), hsl(158, 72%, 28%));
+    --gradient-expense: linear-gradient(135deg, hsl(0, 72%, 50%), hsl(0, 72%, 40%));
+    --gradient-card: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(220, 14%, 96%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(173, 80%, 40%, 0.08) 0%, transparent 70%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px hsl(220, 20%, 80%, 0.3);
+    --shadow-md: 0 4px 16px hsl(220, 20%, 80%, 0.3);
+    --shadow-lg: 0 8px 32px hsl(220, 20%, 80%, 0.4);
+    --shadow-glow: 0 0 40px hsl(173, 80%, 40%, 0.1);
+    --shadow-income: 0 4px 20px hsl(158, 72%, 38%, 0.15);
+    --shadow-expense: 0 4px 20px hsl(0, 72%, 50%, 0.15);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 9% 46%;
+    --sidebar-primary: 173 80% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 94%;
+    --sidebar-accent-foreground: 224 30% 16%;
+    --sidebar-border: 220 13% 90%;
+    --sidebar-ring: 173 80% 40%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(180deg, hsl(var(--atlas-bg-deep)) 0%, hsl(var(--background)) 100%);
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  input, button, textarea, select {
+    font: inherit;
+  }
+}
+
+@layer components {
+  /* Premium Glassmorphism Card */
+  .atlas-glass {
+    @apply rounded-2xl border border-white/[0.08] relative overflow-hidden;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card) / 0.8) 0%,
+      hsl(var(--atlas-surface) / 0.6) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 
+      0 8px 32px hsl(222 47% 4% / 0.4),
+      inset 0 1px 0 hsl(var(--foreground) / 0.05);
+  }
+
+  .atlas-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--foreground) / 0.1) 50%,
+      transparent 100%
+    );
+  }
+
+  .atlas-glass:hover {
+    border-color: hsl(var(--primary) / 0.2);
+    box-shadow: 
+      0 12px 40px hsl(222 47% 4% / 0.5),
+      0 0 60px hsl(var(--primary) / 0.1),
+      inset 0 1px 0 hsl(var(--foreground) / 0.08);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+
+  /* Basic card without effects */
+  .atlas-card {
+    @apply rounded-xl border border-border/50;
+    background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--atlas-surface)) 100%);
+    box-shadow: var(--shadow-md);
+  }
+
+  .atlas-card-glow {
+    @apply atlas-card relative overflow-hidden;
+  }
+
+  .atlas-card-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.5), transparent);
+  }
+
+  /* Premium Summary Cards */
+  .atlas-summary-card {
+    @apply atlas-glass p-6 transition-all duration-300;
+  }
+
+  .atlas-summary-income {
+    @apply atlas-summary-card relative;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--atlas-income) / 0.08) 0%,
+      hsl(var(--card) / 0.9) 100%
+    );
+    box-shadow: 
+      0 8px 32px hsl(var(--atlas-income) / 0.15),
+      inset 0 1px 0 hsl(var(--atlas-income) / 0.1);
+  }
+
+  .atlas-summary-income::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, hsl(var(--atlas-income)), hsl(var(--atlas-income-light)));
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .atlas-summary-expense {
+    @apply atlas-summary-card relative;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--atlas-expense) / 0.08) 0%,
+      hsl(var(--card) / 0.9) 100%
+    );
+    box-shadow: 
+      0 8px 32px hsl(var(--atlas-expense) / 0.15),
+      inset 0 1px 0 hsl(var(--atlas-expense) / 0.1);
+  }
+
+  .atlas-summary-expense::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, hsl(var(--atlas-expense)), hsl(var(--atlas-expense-light)));
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .atlas-summary-balance {
+    @apply atlas-summary-card relative;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.08) 0%,
+      hsl(var(--card) / 0.9) 100%
+    );
+    box-shadow: 
+      0 8px 32px hsl(var(--primary) / 0.15),
+      inset 0 1px 0 hsl(var(--primary) / 0.1);
+  }
+
+  .atlas-summary-balance::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--atlas-cyan-glow)));
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  /* Module Cards */
+  .atlas-module {
+    @apply atlas-glass p-6;
+  }
+
+  .atlas-module-header {
+    @apply flex items-center justify-between mb-6;
+  }
+
+  .atlas-module-title {
+    @apply font-display font-semibold text-lg flex items-center gap-2;
+  }
+
+  .atlas-module-subtitle {
+    @apply text-sm text-muted-foreground;
+  }
+
+  /* Button variants */
+  .atlas-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-200;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    color: hsl(var(--primary-foreground));
+    box-shadow: 0 4px 20px hsl(var(--primary) / 0.4);
+  }
+
+  .atlas-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px hsl(var(--primary) / 0.5);
+  }
+
+  .atlas-btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .atlas-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-all duration-200;
+    background: hsl(var(--secondary));
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
+  }
+
+  .atlas-btn-secondary:hover {
+    background: hsl(var(--atlas-surface-hover));
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  .atlas-btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-all duration-200;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .atlas-btn-ghost:hover {
+    background: hsl(var(--secondary));
+    color: hsl(var(--foreground));
+  }
+
+  /* Input styles */
+  .atlas-input {
+    @apply w-full rounded-xl px-4 py-3 transition-all duration-200 outline-none;
+    background: hsl(var(--secondary) / 0.5);
+    border: 1px solid hsl(var(--border));
+    color: hsl(var(--foreground));
+    backdrop-filter: blur(10px);
+  }
+
+  .atlas-input::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .atlas-input:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.15);
+  }
+
+  /* Sidebar navigation */
+  .atlas-nav-item {
+    @apply flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 relative;
+    color: hsl(var(--sidebar-foreground));
+  }
+
+  .atlas-nav-item:hover {
+    background: hsl(var(--sidebar-accent));
+    color: hsl(var(--foreground));
+  }
+
+  .atlas-nav-item.active {
+    background: hsl(var(--primary) / 0.15);
+    color: hsl(var(--primary));
+  }
+
+  .atlas-nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 24px;
+    background: hsl(var(--primary));
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* Chart container */
+  .atlas-chart {
+    @apply atlas-glass p-6;
+  }
+
+  /* Transaction item */
+  .atlas-transaction {
+    @apply flex items-center justify-between py-4 px-3 rounded-xl border-b border-border/20 last:border-0 transition-all duration-200;
+  }
+
+  .atlas-transaction:hover {
+    background: hsl(var(--secondary) / 0.3);
+  }
+
+  /* Badge styles */
+  .atlas-badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .atlas-badge-income {
+    @apply atlas-badge;
+    background: hsl(var(--atlas-income) / 0.15);
+    color: hsl(var(--atlas-income-light));
+  }
+
+  .atlas-badge-expense {
+    @apply atlas-badge;
+    background: hsl(var(--atlas-expense) / 0.15);
+    color: hsl(var(--atlas-expense-light));
+  }
+
+  .atlas-badge-pro {
+    @apply atlas-badge;
+    background: linear-gradient(135deg, hsl(var(--atlas-purple)), hsl(var(--atlas-cyan)));
+    color: white;
+  }
+
+  .atlas-badge-warning {
+    @apply atlas-badge;
+    background: hsl(var(--atlas-orange) / 0.15);
+    color: hsl(var(--atlas-orange));
+  }
+
+  .atlas-badge-danger {
+    @apply atlas-badge;
+    background: hsl(var(--atlas-expense) / 0.15);
+    color: hsl(var(--atlas-expense));
+  }
+
+  .atlas-badge-coming-soon {
+    @apply atlas-badge;
+    background: hsl(var(--atlas-purple) / 0.15);
+    color: hsl(var(--atlas-purple));
+  }
+
+  /* Progress bar */
+  .atlas-progress {
+    @apply h-2 rounded-full overflow-hidden;
+    background: hsl(var(--secondary));
+  }
+
+  .atlas-progress-bar {
+    @apply h-full rounded-full transition-all duration-500;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--atlas-cyan-glow)));
+  }
+
+  .atlas-progress-bar-warning {
+    @apply h-full rounded-full transition-all duration-500;
+    background: linear-gradient(90deg, hsl(var(--atlas-orange)), hsl(var(--atlas-yellow)));
+  }
+
+  .atlas-progress-bar-danger {
+    @apply h-full rounded-full transition-all duration-500;
+    background: linear-gradient(90deg, hsl(var(--atlas-expense)), hsl(var(--atlas-expense-light)));
+  }
+
+  /* Installment progress */
+  .atlas-installment-progress {
+    @apply h-1.5 rounded-full overflow-hidden;
+    background: hsl(var(--secondary));
+  }
+
+  .atlas-installment-bar {
+    @apply h-full rounded-full;
+    background: linear-gradient(90deg, hsl(var(--atlas-purple)), hsl(var(--atlas-cyan)));
+  }
+
+  /* Plan cards */
+  .atlas-plan-card {
+    @apply atlas-glass p-8 text-center relative;
+  }
+
+  .atlas-plan-card.popular {
+    border-color: hsl(var(--primary) / 0.3);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.1) 0%,
+      hsl(var(--card) / 0.9) 100%
+    );
+  }
+
+  .atlas-plan-card.popular::before {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--primary) / 0.5) 50%,
+      transparent 100%
+    );
+  }
+
+  /* Paywall overlay */
+  .atlas-paywall-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center;
+    background: hsl(var(--background) / 0.95);
+    backdrop-filter: blur(20px);
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.2); }
+    50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.4); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.4s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--foreground) / 0.05),
+      transparent
+    );
+    background-size: 200% 100%;
+  }
+
+  /* Stagger children animations */
+  .stagger-children > * {
+    opacity: 0;
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.15s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.25s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(6) { animation-delay: 0.35s; }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+
+  /* Responsive utilities */
+  @media (max-width: 768px) {
+    .atlas-glass:hover {
+      transform: none;
+    }
+
+    .atlas-summary-card:active {
+      transform: scale(0.98);
+    }
+  }
+}
