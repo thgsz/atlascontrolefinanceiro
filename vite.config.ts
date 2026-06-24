@@ -17,39 +17,8 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === "development" && componentTagger(),
     VitePWA({
-      registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "icon-192.png", "icon-512.png"],
-      manifest: {
-        name: "Atlas - Controle Financeiro",
-        short_name: "Atlas",
-        description: "Controle financeiro simples, visual e inteligente",
-        start_url: "/dashboard",
-        display: "standalone",
-        theme_color: "#0a0f1a",
-        background_color: "#0a0f1a",
-        icons: [
-          {
-            src: "/icon-192.png",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "/icon-512.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
-          {
-            src: "/icon-512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "maskable",
-          },
-        ],
-      },
-      workbox: {
-        navigateFallbackDenylist: [/^\/~oauth/],
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
-      },
+      selfDestroying: true,
+      injectRegister: "auto",
     }),
   ].filter(Boolean),
   resolve: {

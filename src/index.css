@@ -1,12 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Atlas - Premium Dark Fintech Design System */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 @layer base {
   :root {
