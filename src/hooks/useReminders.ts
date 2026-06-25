@@ -24,7 +24,7 @@ export function useReminders() {
     if (!user) return;
 
     const channel = supabase
-      .channel('reminders-changes')
+      .channel(`reminders-changes-${user.id}-${crypto.randomUUID()}`)
       .on(
         'postgres_changes',
         {
