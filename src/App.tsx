@@ -86,7 +86,15 @@ function AnimatedRoutes() {
 const App = () => {
   const [showSplash, setShowSplash] = useState(() => {
     const seen = sessionStorage.getItem('atlas_splash_seen');
-    return !seen;
+    // Skip splash when returning from email confirmation / magic link / recovery
+    const hash = typeof window !== 'undefined' ? window.location.hash : '';
+    const search = typeof window !== 'undefined' ? window.location.search : '';
+    const hasAuthTokens =
+      hash.includes('access_token') ||
+      hash.includes('type=') ||
+      hash.includes('error') ||
+      search.includes('code=');
+    return !seen && !hasAuthTokens;
   });
 
   const handleSplashComplete = () => {
