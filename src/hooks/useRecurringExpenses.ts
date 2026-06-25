@@ -29,7 +29,7 @@ export function useRecurringExpenses() {
     if (!user) return;
 
     const channel = supabase
-      .channel('recurring-expenses-changes')
+      .channel(`recurring-expenses-changes-${user.id}-${crypto.randomUUID()}`)
       .on(
         'postgres_changes',
         {

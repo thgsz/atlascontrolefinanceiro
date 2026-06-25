@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 import atlasIcon from '@/assets/icon-192.png';
 
 interface SplashScreenProps {
@@ -6,6 +7,19 @@ interface SplashScreenProps {
 }
 
 export function SplashScreen({ onComplete }: SplashScreenProps) {
+  const completedRef = useRef(false);
+
+  const completeSplash = () => {
+    if (completedRef.current) return;
+    completedRef.current = true;
+    onComplete();
+  };
+
+  useEffect(() => {
+    const timer = window.setTimeout(completeSplash, 1400);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   return (
     <AnimatePresence>
       <motion.div
@@ -48,7 +62,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
             times: [0, 0.25, 0.5, 0.75, 1],
             ease: 'easeInOut',
           }}
-          onAnimationComplete={onComplete}
+          onAnimationComplete={completeSplash}
         />
 
         {/* Text */}

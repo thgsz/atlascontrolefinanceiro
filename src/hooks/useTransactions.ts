@@ -37,7 +37,7 @@ export function useTransactions(month?: number, year?: number) {
     if (!user) return;
 
     const channel = supabase
-      .channel('transactions-changes')
+      .channel(`transactions-changes-${user.id}-${crypto.randomUUID()}`)
       .on(
         'postgres_changes',
         {

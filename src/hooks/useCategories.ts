@@ -22,7 +22,7 @@ export function useCategories() {
     if (!user) return;
 
     const channel = supabase
-      .channel('categories-changes')
+      .channel(`categories-changes-${user.id}-${crypto.randomUUID()}`)
       .on(
         'postgres_changes',
         {
