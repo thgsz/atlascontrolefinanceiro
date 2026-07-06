@@ -5,7 +5,8 @@ import { Footer } from './Footer';
 import { AtlasCopilot } from './AtlasCopilot';
 import { useProfile } from '@/hooks/useProfile';
 import { useAvatarUrl } from '@/hooks/useAvatarUrl';
-import { Menu, X, UserCircle } from 'lucide-react';
+import { useAuth } from '@/lib/auth-context';
+import { Menu, X, UserCircle, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface DashboardLayoutProps {
