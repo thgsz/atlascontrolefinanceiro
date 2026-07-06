@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { DashboardLayout } from '@/components/atlas/DashboardLayout';
 import { useAuth } from '@/lib/auth-context';
 import { useProfile, useUpdateProfile } from '@/hooks/useProfile';
+import { useAvatarUrl } from '@/hooks/useAvatarUrl';
 import { useTheme } from '@/lib/theme-context';
 import { User, Bell, Shield, Download, Trash2, Save, Key, Smartphone, Loader2, AlertTriangle, Camera, Sun, Moon, Palette } from 'lucide-react';
 import { toast } from 'sonner';
@@ -22,6 +23,7 @@ export default function Settings() {
   const { user, session, signOut } = useAuth();
   const { data: profile } = useProfile();
   const updateProfile = useUpdateProfile();
+  const avatarSignedUrl = useAvatarUrl(profile?.avatar_url);
   const { theme, setTheme } = useTheme();
 
   const [fullName, setFullName] = useState('');
@@ -74,13 +76,7 @@ export default function Settings() {
 
       if (uploadError) throw uploadError;
 
-      const { data: { publicUrl } } = supabase.storage
-        .from('avatars')
-        .getPublicUrl(filePath);
-
-      const avatarUrlWithCache = `${publicUrl}?t=${Date.now()}`;
-
-      await updateProfile.mutateAsync({ avatar_url: avatarUrlWithCache });
+      await updateProfile.mutateAsync({ avatar_url: `${filePath}?t=${Date.now()}` });
       toast.success('Avatar atualizado!');
     } catch (error) {
       console.error('Avatar upload error:', error);
@@ -225,8 +221,8 @@ export default function Settings() {
               <div className="flex items-center gap-6">
                 <div className="relative group">
                   <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary/30">
-                    {profile?.avatar_url ? (
-                      <img src={profile.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                    {avatarSignedUrl ? (
+                      <img src={avatarSignedUrl} alt="Avatar" className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-primary/10">
                         <User className="w-8 h-8 text-primary" />
