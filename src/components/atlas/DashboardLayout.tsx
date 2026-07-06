@@ -4,6 +4,7 @@ import { Sidebar } from './Sidebar';
 import { Footer } from './Footer';
 import { AtlasCopilot } from './AtlasCopilot';
 import { useProfile } from '@/hooks/useProfile';
+import { useAvatarUrl } from '@/hooks/useAvatarUrl';
 import { Menu, X, UserCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -14,6 +15,7 @@ interface DashboardLayoutProps {
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: profile } = useProfile();
+  const avatarSignedUrl = useAvatarUrl(profile?.avatar_url);
   const navigate = useNavigate();
 
   // Close mobile menu on resize
@@ -47,8 +49,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           onClick={() => navigate('/settings')}
           className="rounded-full overflow-hidden w-9 h-9 border-2 border-primary/30 hover:border-primary transition-colors"
         >
-          {profile?.avatar_url ? (
-            <img src={profile.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+          {avatarSignedUrl ? (
+            <img src={avatarSignedUrl} alt="Avatar" className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-primary/10">
               <UserCircle className="w-5 h-5 text-primary" />
