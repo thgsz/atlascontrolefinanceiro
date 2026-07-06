@@ -416,6 +416,16 @@ export default function Settings() {
                   {isExporting ? (<><Loader2 className="w-4 h-4 animate-spin" />Exportando...</>) : (<><Download className="w-4 h-4" />Exportar CSV</>)}
                 </button>
               </div>
+              <div className="atlas-card p-6 border border-border/60">
+                <div className="flex items-center gap-3 mb-4">
+                  <LogOut className="w-5 h-5 text-amber-500" />
+                  <h2 className="font-display text-lg font-semibold">Sair da Conta</h2>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">Desconecte-se da conta atual e retorne à tela de login.</p>
+                <button onClick={handleSignOut} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 transition-colors">
+                  <LogOut className="w-4 h-4" />Sair da conta
+                </button>
+              </div>
               <div className="atlas-card p-6 border border-destructive/20">
                 <div className="flex items-center gap-3 mb-4">
                   <Trash2 className="w-5 h-5 text-destructive" />
