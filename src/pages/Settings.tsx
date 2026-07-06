@@ -179,6 +179,15 @@ export default function Settings() {
     { id: 'data', label: 'Dados', icon: Download },
   ];
 
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error('Sign out error:', error);
+      toast.error('Erro ao sair da conta');
+    }
+  };
+
   return (
     <DashboardLayout>
       <div className="mb-8">
