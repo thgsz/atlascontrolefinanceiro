@@ -23,6 +23,7 @@ export default function Settings() {
   const { user, session, signOut } = useAuth();
   const { data: profile } = useProfile();
   const updateProfile = useUpdateProfile();
+  const avatarSignedUrl = useAvatarUrl(profile?.avatar_url);
   const { theme, setTheme } = useTheme();
 
   const [fullName, setFullName] = useState('');
@@ -220,8 +221,8 @@ export default function Settings() {
               <div className="flex items-center gap-6">
                 <div className="relative group">
                   <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary/30">
-                    {profile?.avatar_url ? (
-                      <img src={profile.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                    {avatarSignedUrl ? (
+                      <img src={avatarSignedUrl} alt="Avatar" className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-primary/10">
                         <User className="w-8 h-8 text-primary" />
