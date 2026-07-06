@@ -17,6 +17,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: profile } = useProfile();
   const avatarSignedUrl = useAvatarUrl(profile?.avatar_url);
+  const { signOut } = useAuth();
   const navigate = useNavigate();
 
   // Close mobile menu on resize
