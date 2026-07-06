@@ -4,7 +4,7 @@ import { useAuth } from '@/lib/auth-context';
 import { useProfile, useUpdateProfile } from '@/hooks/useProfile';
 import { useAvatarUrl } from '@/hooks/useAvatarUrl';
 import { useTheme } from '@/lib/theme-context';
-import { User, Bell, Shield, Download, Trash2, Save, Key, Smartphone, Loader2, AlertTriangle, Camera, Sun, Moon, Palette } from 'lucide-react';
+import { User, Bell, Shield, Download, Trash2, Save, Key, Smartphone, Loader2, AlertTriangle, Camera, Sun, Moon, Palette, LogOut } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
