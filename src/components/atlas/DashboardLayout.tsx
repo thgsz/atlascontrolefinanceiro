@@ -47,18 +47,27 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <Menu className="w-5 h-5" />
         </button>
         <span className="font-display font-bold text-lg">Atlas</span>
-        <button
-          onClick={() => navigate('/settings')}
-          className="rounded-full overflow-hidden w-9 h-9 border-2 border-primary/30 hover:border-primary transition-colors"
-        >
-          {avatarSignedUrl ? (
-            <img src={avatarSignedUrl} alt="Avatar" className="w-full h-full object-cover" />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-primary/10">
-              <UserCircle className="w-5 h-5 text-primary" />
-            </div>
-          )}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => signOut()}
+            className="p-2 rounded-lg hover:bg-destructive/10 hover:text-destructive text-muted-foreground transition-colors"
+            aria-label="Sair da conta"
+          >
+            <LogOut className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => navigate('/settings')}
+            className="rounded-full overflow-hidden w-9 h-9 border-2 border-primary/30 hover:border-primary transition-colors"
+          >
+            {avatarSignedUrl ? (
+              <img src={avatarSignedUrl} alt="Avatar" className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-primary/10">
+                <UserCircle className="w-5 h-5 text-primary" />
+              </div>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile sidebar overlay */}
