@@ -74,13 +74,7 @@ export default function Settings() {
 
       if (uploadError) throw uploadError;
 
-      const { data: { publicUrl } } = supabase.storage
-        .from('avatars')
-        .getPublicUrl(filePath);
-
-      const avatarUrlWithCache = `${publicUrl}?t=${Date.now()}`;
-
-      await updateProfile.mutateAsync({ avatar_url: avatarUrlWithCache });
+      await updateProfile.mutateAsync({ avatar_url: `${filePath}?t=${Date.now()}` });
       toast.success('Avatar atualizado!');
     } catch (error) {
       console.error('Avatar upload error:', error);
