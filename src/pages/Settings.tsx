@@ -4,7 +4,7 @@ import { useAuth } from '@/lib/auth-context';
 import { useProfile, useUpdateProfile } from '@/hooks/useProfile';
 import { useAvatarUrl } from '@/hooks/useAvatarUrl';
 import { useTheme } from '@/lib/theme-context';
-import { User, Bell, Shield, Download, Trash2, Save, Key, Smartphone, Loader2, AlertTriangle, Camera, Sun, Moon, Palette } from 'lucide-react';
+import { User, Bell, Shield, Download, Trash2, Save, Key, Smartphone, Loader2, AlertTriangle, Camera, Sun, Moon, Palette, LogOut } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
@@ -178,6 +178,15 @@ export default function Settings() {
     { id: 'security', label: 'Segurança', icon: Shield },
     { id: 'data', label: 'Dados', icon: Download },
   ];
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error('Sign out error:', error);
+      toast.error('Erro ao sair da conta');
+    }
+  };
 
   return (
     <DashboardLayout>
@@ -405,6 +414,16 @@ export default function Settings() {
                 <p className="text-sm text-muted-foreground mb-4">Baixe todas suas transações, categorias e assinaturas em formato CSV.</p>
                 <button onClick={handleExportData} disabled={isExporting} className="atlas-btn-secondary">
                   {isExporting ? (<><Loader2 className="w-4 h-4 animate-spin" />Exportando...</>) : (<><Download className="w-4 h-4" />Exportar CSV</>)}
+                </button>
+              </div>
+              <div className="atlas-card p-6 border border-border/60">
+                <div className="flex items-center gap-3 mb-4">
+                  <LogOut className="w-5 h-5 text-amber-500" />
+                  <h2 className="font-display text-lg font-semibold">Sair da Conta</h2>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">Desconecte-se da conta atual e retorne à tela de login.</p>
+                <button onClick={handleSignOut} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 transition-colors">
+                  <LogOut className="w-4 h-4" />Sair da conta
                 </button>
               </div>
               <div className="atlas-card p-6 border border-destructive/20">
