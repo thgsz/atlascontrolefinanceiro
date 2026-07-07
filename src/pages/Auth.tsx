@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useAuth } from '@/lib/auth-context';
 import { Logo } from '@/components/atlas/Logo';
 import { toast } from 'sonner';
