@@ -55,7 +55,7 @@ export default function Auth() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Logo size="lg" className="justify-center mb-4" />
-          <h1 className="font-display text-2xl font-bold mb-2">Entrar</h1>
+          <h1 className="font-display text-2xl font-bold mb-2">Entrar — Atlas Controle Financeiro</h1>
           <p className="text-muted-foreground">
             {mode === 'signin'
               ? 'Entre na sua conta'
@@ -120,6 +120,7 @@ export default function Auth() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {showPassword ? (
