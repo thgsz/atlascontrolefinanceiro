@@ -1,8 +1,17 @@
+import { Helmet } from 'react-helmet-async';
 import { PublicLayout } from '@/components/atlas/PublicLayout';
 
 export default function Contact() {
   return (
     <PublicLayout>
+      <Helmet>
+        <title>Contato — Atlas Controle Financeiro</title>
+        <meta name="description" content="Fale com o time do Atlas: suporte, sugestões e solicitações de exclusão de conta. Respondemos em até 48 horas." />
+        <link rel="canonical" href="https://atlascontrolefinanceiro.lovable.app/contact" />
+        <meta property="og:title" content="Contato — Atlas Controle Financeiro" />
+        <meta property="og:description" content="Fale com o time do Atlas: suporte, sugestões e solicitações de exclusão de conta. Respondemos em até 48 horas." />
+        <meta property="og:url" content="https://atlascontrolefinanceiro.lovable.app/contact" />
+      </Helmet>
       <article>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">
           Contato
