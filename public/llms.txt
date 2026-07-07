@@ -1,0 +1,13 @@
+# Atlas — Controle Financeiro
+
+> Aplicativo de controle financeiro pessoal simples e visual: acompanhe entradas, saídas, categorias e saldo em tempo real, sincronizados entre celular e computador.
+
+## Pages
+
+- [Entrar](/auth): Login e cadastro no Atlas.
+- [Contato](/contact): Suporte, sugestões e exclusão de conta.
+
+## Optional
+
+- [Política de Privacidade](/privacy): Como coletamos, usamos e protegemos seus dados.
+- [Termos de Uso](/terms): Regras e responsabilidades para uso do app.

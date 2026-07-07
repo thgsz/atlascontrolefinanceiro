@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useAuth } from '@/lib/auth-context';
 import { Logo } from '@/components/atlas/Logo';
 import { toast } from 'sonner';
@@ -39,6 +40,14 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen min-h-[100dvh] flex items-center justify-center px-4 py-8 w-full">
+      <Helmet>
+        <title>Entrar — Atlas Controle Financeiro</title>
+        <meta name="description" content="Entre na sua conta Atlas ou crie uma nova para começar a organizar seu controle financeiro pessoal em minutos." />
+        <link rel="canonical" href="https://atlascontrolefinanceiro.lovable.app/auth" />
+        <meta property="og:title" content="Entrar — Atlas Controle Financeiro" />
+        <meta property="og:description" content="Entre na sua conta Atlas ou crie uma nova para começar a organizar seu controle financeiro pessoal em minutos." />
+        <meta property="og:url" content="https://atlascontrolefinanceiro.lovable.app/auth" />
+      </Helmet>
       {/* Background gradient */}
       <div className="absolute inset-0 overflow-hidden">
         <div

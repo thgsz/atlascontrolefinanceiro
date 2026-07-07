@@ -1,8 +1,17 @@
+import { Helmet } from 'react-helmet-async';
 import { PublicLayout } from '@/components/atlas/PublicLayout';
 
 export default function Privacy() {
   return (
     <PublicLayout>
+      <Helmet>
+        <title>Política de Privacidade — Atlas Controle Financeiro</title>
+        <meta name="description" content="Saiba como o Atlas coleta, usa e protege seus dados pessoais no aplicativo de controle financeiro." />
+        <link rel="canonical" href="https://atlascontrolefinanceiro.lovable.app/privacy" />
+        <meta property="og:title" content="Política de Privacidade — Atlas Controle Financeiro" />
+        <meta property="og:description" content="Saiba como o Atlas coleta, usa e protege seus dados pessoais no aplicativo de controle financeiro." />
+        <meta property="og:url" content="https://atlascontrolefinanceiro.lovable.app/privacy" />
+      </Helmet>
       <article className="prose-custom">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">
           Política de Privacidade

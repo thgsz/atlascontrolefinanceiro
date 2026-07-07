@@ -1,8 +1,17 @@
+import { Helmet } from 'react-helmet-async';
 import { PublicLayout } from '@/components/atlas/PublicLayout';
 
 export default function Terms() {
   return (
     <PublicLayout>
+      <Helmet>
+        <title>Termos de Uso — Atlas Controle Financeiro</title>
+        <meta name="description" content="Termos de uso do Atlas: regras, responsabilidades e condições para uso do aplicativo de controle financeiro pessoal." />
+        <link rel="canonical" href="https://atlascontrolefinanceiro.lovable.app/terms" />
+        <meta property="og:title" content="Termos de Uso — Atlas Controle Financeiro" />
+        <meta property="og:description" content="Termos de uso do Atlas: regras, responsabilidades e condições para uso do aplicativo de controle financeiro pessoal." />
+        <meta property="og:url" content="https://atlascontrolefinanceiro.lovable.app/terms" />
+      </Helmet>
       <article>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">
           Termos de Uso
