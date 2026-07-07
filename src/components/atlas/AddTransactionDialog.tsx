@@ -65,12 +65,16 @@ export function AddTransactionDialog({ variant = 'default' }: AddTransactionDial
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {variant === 'fab' ? (
-          <button className="fixed bottom-24 right-5 z-40 w-14 h-14 rounded-full flex items-center justify-center shadow-md transition-transform duration-200 hover:scale-105 active:scale-95 bg-primary text-primary-foreground">
+          <button
+            aria-label="Nova transação"
+            className="fixed bottom-24 right-5 z-40 w-14 h-14 rounded-full flex items-center justify-center shadow-md transition-transform duration-200 hover:scale-105 active:scale-95 bg-primary text-primary-foreground"
+          >
             <Plus className="w-6 h-6" />
           </button>
         ) : variant === 'icon' ? (
           <button
             className="w-9 h-9 rounded-xl flex items-center justify-center bg-primary text-primary-foreground transition-transform duration-150 hover:scale-105 active:scale-95"
+            aria-label="Nova transação"
             title="Nova Transação"
           >
             <Plus className="w-5 h-5" />
