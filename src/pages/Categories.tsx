@@ -163,18 +163,19 @@ export default function Categories() {
                 </label>
                 <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-2">
                   {iconOptions.map((icon) => (
-                    <motion.button
-                      key={icon}
-                      type="button"
-                      whileHover={{ scale: 1.08 }}
-                      whileTap={{ scale: 0.92 }}
-                      onClick={() => setSelectedIcon(icon)}
-                      className={`p-2 rounded-lg transition-all duration-150 ${
-                        selectedIcon === icon
-                          ? 'bg-primary/20 ring-1 ring-primary/40'
-                          : 'bg-secondary hover:bg-secondary/80'
-                      }`}
-                    >
+                  <motion.button
+                    key={icon}
+                    type="button"
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.92 }}
+                    onClick={() => setSelectedIcon(icon)}
+                    aria-label={`Selecionar ícone ${icon}`}
+                    className={`p-2 rounded-lg transition-all duration-150 ${
+                      selectedIcon === icon
+                        ? 'bg-primary/20 ring-1 ring-primary/40'
+                        : 'bg-secondary hover:bg-secondary/80'
+                    }`}
+                  >
                       <CategoryIcon icon={icon} color={selectedColor} size="sm" />
                     </motion.button>
                   ))}
@@ -233,6 +234,7 @@ export default function Categories() {
               {!category.is_default && (
                 <button
                   onClick={() => handleDelete(category.id, category.is_default)}
+                  aria-label={`Remover categoria ${category.name}`}
                   className="opacity-0 group-hover:opacity-100 p-2 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-all"
                 >
                   <Trash2 className="w-4 h-4" />
