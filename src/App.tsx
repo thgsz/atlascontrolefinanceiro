@@ -2,27 +2,28 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/lib/auth-context";
 import { ThemeProvider } from "@/lib/theme-context";
 import { PrivacyProvider } from "@/lib/privacy-context";
 import { AnimatedLoader } from "@/components/motion/AnimatedLoader";
 import { SplashScreen } from "@/components/atlas/SplashScreen";
+import { AnimatePresence, motion } from "framer-motion";
+import { ReactNode, Suspense, lazy, useState } from "react";
 
-// Pages
-import Dashboard from "./pages/Dashboard";
-import Transactions from "./pages/Transactions";
-import Categories from "./pages/Categories";
-import Analytics from "./pages/Analytics";
-import Settings from "./pages/Settings";
-import SubscriptionsPage from "./pages/SubscriptionsPage";
-import InstallmentsPage from "./pages/InstallmentsPage";
-import Auth from "./pages/Auth";
-import NotFound from "./pages/NotFound";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import Contact from "./pages/Contact";
-import { ReactNode, useState } from "react";
+// Lazy-loaded pages for faster initial load
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Transactions = lazy(() => import("./pages/Transactions"));
+const Categories = lazy(() => import("./pages/Categories"));
+const Analytics = lazy(() => import("./pages/Analytics"));
+const Settings = lazy(() => import("./pages/Settings"));
+const SubscriptionsPage = lazy(() => import("./pages/SubscriptionsPage"));
+const InstallmentsPage = lazy(() => import("./pages/InstallmentsPage"));
+const Auth = lazy(() => import("./pages/Auth"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Contact = lazy(() => import("./pages/Contact"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -64,8 +65,19 @@ function PublicRoute({ children }: { children: ReactNode }) {
 }
 
 function AnimatedRoutes() {
+  const location = useLocation();
   return (
-    <Routes>
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, filter: "blur(6px)", y: 4 }}
+        animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+        exit={{ opacity: 0, filter: "blur(6px)", y: -4 }}
+        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+        style={{ willChange: "opacity, filter, transform" }}
+      >
+        <Suspense fallback={<AnimatedLoader />}>
+          <Routes location={location}>
       <Route path="/" element={<Navigate to="/auth" replace />} />
       <Route path="/auth" element={<PublicRoute><Auth /></PublicRoute>} />
       <Route path="/privacy" element={<Privacy />} />
@@ -79,7 +91,10 @@ function AnimatedRoutes() {
       <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
       <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
-    </Routes>
+          </Routes>
+        </Suspense>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
