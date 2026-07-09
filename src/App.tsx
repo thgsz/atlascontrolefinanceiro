@@ -6,10 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { AuthProvider, useAuth } from "@/lib/auth-context";
 import { ThemeProvider } from "@/lib/theme-context";
 import { PrivacyProvider } from "@/lib/privacy-context";
-import { AnimatedLoader } from "@/components/motion/AnimatedLoader";
-import { SplashScreen } from "@/components/atlas/SplashScreen";
 import { AnimatePresence, motion } from "framer-motion";
-import { ReactNode, Suspense, lazy, useState } from "react";
+import { ReactNode, Suspense, lazy } from "react";
 
 // Lazy-loaded pages for faster initial load
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -40,7 +38,7 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <AnimatedLoader />;
+    return null;
   }
 
   if (!user) {
@@ -54,7 +52,7 @@ function PublicRoute({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <AnimatedLoader />;
+    return null;
   }
 
   if (user) {
@@ -70,13 +68,13 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={location.pathname}
-        initial={{ opacity: 0, filter: "blur(6px)", y: 4 }}
-        animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-        exit={{ opacity: 0, filter: "blur(6px)", y: -4 }}
-        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-        style={{ willChange: "opacity, filter, transform" }}
+        initial={{ opacity: 0, filter: "blur(3px)" }}
+        animate={{ opacity: 1, filter: "blur(0px)" }}
+        exit={{ opacity: 0, filter: "blur(3px)" }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
+        style={{ willChange: "opacity, filter" }}
       >
-        <Suspense fallback={<AnimatedLoader />}>
+        <Suspense fallback={null}>
           <Routes location={location}>
       <Route path="/" element={<Navigate to="/auth" replace />} />
       <Route path="/auth" element={<PublicRoute><Auth /></PublicRoute>} />
@@ -99,28 +97,6 @@ function AnimatedRoutes() {
 }
 
 const App = () => {
-  const [showSplash, setShowSplash] = useState(() => {
-    const seen = sessionStorage.getItem('atlas_splash_seen');
-    // Skip splash when returning from email confirmation / magic link / recovery
-    const hash = typeof window !== 'undefined' ? window.location.hash : '';
-    const search = typeof window !== 'undefined' ? window.location.search : '';
-    const hasAuthTokens =
-      hash.includes('access_token') ||
-      hash.includes('type=') ||
-      hash.includes('error') ||
-      search.includes('code=');
-    return !seen && !hasAuthTokens;
-  });
-
-  const handleSplashComplete = () => {
-    sessionStorage.setItem('atlas_splash_seen', '1');
-    setShowSplash(false);
-  };
-
-  if (showSplash) {
-    return <SplashScreen onComplete={handleSplashComplete} />;
-  }
-
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
