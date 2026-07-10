@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/auth-context';
 import { Logo } from '@/components/atlas/Logo';
 import { toast } from 'sonner';
-import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, Loader2, ShieldCheck } from 'lucide-react';
 
 export default function Auth() {
   const [mode, setMode] = useState<'signin' | 'signup'>('signin');
@@ -39,7 +40,7 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen min-h-[100dvh] flex items-center justify-center px-4 py-8 w-full">
+    <div className="relative min-h-screen min-h-[100dvh] flex items-center justify-center px-4 py-10 w-full overflow-hidden">
       <Helmet>
         <title>Entrar — Atlas Controle Financeiro</title>
         <meta name="description" content="Entre na sua conta Atlas ou crie uma nova para começar a organizar seu controle financeiro pessoal em minutos." />
@@ -48,35 +49,57 @@ export default function Auth() {
         <meta property="og:description" content="Entre na sua conta Atlas ou crie uma nova para começar a organizar seu controle financeiro pessoal em minutos." />
         <meta property="og:url" content="https://atlascontrolefinanceiro.lovable.app/auth" />
       </Helmet>
-      {/* Background gradient */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-20"
-          style={{ background: 'hsl(173, 80%, 50%)' }}
+      {/* Ambient background */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-[15%] left-[10%] w-[520px] h-[520px] rounded-full blur-3xl"
+          style={{ background: 'hsl(173, 80%, 50%)', opacity: 0.18 }}
+          animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute bottom-[10%] right-[8%] w-[440px] h-[440px] rounded-full blur-3xl"
+          style={{ background: 'hsl(265, 72%, 55%)', opacity: 0.12 }}
+          animate={{ x: [0, -25, 0], y: [0, 20, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
         />
         <div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-10"
-          style={{ background: 'hsl(265, 72%, 55%)' }}
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.06), transparent 60%)',
+          }}
         />
       </div>
 
-      <div className="relative w-full max-w-md">
+      <motion.div
+        className="relative w-full max-w-md"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
         {/* Logo */}
         <div className="text-center mb-8">
-          <Logo size="lg" className="justify-center mb-4" />
-          <h1 className="font-display text-2xl font-bold mb-2">Entrar — Atlas Controle Financeiro</h1>
-          <p className="text-muted-foreground">
+          <Logo size="lg" className="justify-center mb-5" showText={false} />
+          <h1 className="font-display text-3xl font-bold tracking-tight mb-1.5">
+            {mode === 'signin' ? 'Bem-vindo de volta' : 'Crie sua conta'}
+          </h1>
+          <p className="text-muted-foreground text-sm">
             {mode === 'signin'
-              ? 'Entre na sua conta'
-              : 'Crie sua conta para começar'}
+              ? 'Entre para continuar organizando suas finanças.'
+              : 'Comece a organizar seu dinheiro em minutos.'}
           </p>
         </div>
 
         {/* Form card */}
-        <div className="atlas-card-glow p-8">
+        <div className="atlas-glass p-7 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
             {mode === 'signup' && (
-              <div>
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                transition={{ duration: 0.25 }}
+              >
                 <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Nome completo
                 </label>
@@ -91,7 +114,7 @@ export default function Auth() {
                     required={mode === 'signup'}
                   />
                 </div>
-              </div>
+              </motion.div>
             )}
 
             <div>
@@ -144,8 +167,9 @@ export default function Auth() {
             <button
               type="submit"
               disabled={loading}
-              className="atlas-btn-primary w-full"
+              className="atlas-btn-primary w-full disabled:opacity-70 disabled:cursor-not-allowed"
             >
+              {loading && <Loader2 className="w-4 h-4 animate-spin" />}
               {loading
                 ? 'Carregando...'
                 : mode === 'signin'
@@ -180,7 +204,13 @@ export default function Auth() {
             </p>
           </div>
         </div>
-      </div>
+
+        {/* Trust strip */}
+        <div className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+          <ShieldCheck className="w-3.5 h-3.5 text-primary/70" />
+          <span>Seus dados são criptografados e privados.</span>
+        </div>
+      </motion.div>
     </div>
   );
 }

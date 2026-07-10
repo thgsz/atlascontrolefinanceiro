@@ -1,6 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Logo } from './Logo';
+import { motion } from 'framer-motion';
 import {
   LayoutDashboard,
   ArrowLeftRight,
@@ -34,16 +35,32 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 h-screen flex flex-col border-r border-border/50 bg-sidebar transition-all duration-300 z-50',
+        'fixed left-0 top-0 h-screen flex flex-col border-r border-sidebar-border/60 z-50',
+        'bg-sidebar/85 backdrop-blur-xl supports-[backdrop-filter]:bg-sidebar/70',
+        'transition-[width] duration-300 ease-out',
         collapsed ? 'w-20' : 'w-60'
       )}
+      style={{
+        boxShadow: 'inset -1px 0 0 hsl(var(--sidebar-border) / 0.5)',
+      }}
     >
+      {/* Ambient glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 40% at 0% 0%, hsl(var(--primary) / 0.08), transparent 60%)',
+        }}
+      />
+
       {/* Header */}
-      <div className="p-6 flex items-center justify-between">
+      <div className="relative p-6 flex items-center justify-between">
         <Logo size="md" showText={!collapsed} />
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="p-2 rounded-lg hover:bg-secondary transition-colors"
+          className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary/70 transition-colors active:scale-95"
+          aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
         >
           {collapsed ? (
             <ChevronRight className="w-4 h-4" />
@@ -54,7 +71,7 @@ export function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 space-y-1">
+      <nav className="relative flex-1 px-3 space-y-0.5">
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
           const Icon = item.icon;
@@ -63,31 +80,50 @@ export function Sidebar() {
             <NavLink
               key={item.path}
               to={item.path}
+              title={collapsed ? item.label : undefined}
               className={cn(
-                'relative flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-200',
+                'group relative flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium',
+                'transition-colors duration-200 active:scale-[0.98]',
                 isActive
-                  ? 'bg-primary/10 text-primary'
-                  : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground'
+                  ? 'text-primary'
+                  : 'text-sidebar-foreground hover:bg-sidebar-accent/60 hover:text-foreground'
               )}
             >
               {isActive && (
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-r-full" />
+                <motion.div
+                  layoutId="sidebar-active-pill"
+                  className="absolute inset-0 rounded-xl -z-0"
+                  style={{
+                    background:
+                      'linear-gradient(90deg, hsl(var(--primary) / 0.18) 0%, hsl(var(--primary) / 0.06) 100%)',
+                    boxShadow: 'inset 0 0 0 1px hsl(var(--primary) / 0.22)',
+                  }}
+                  transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                />
               )}
-              <Icon className="w-5 h-5 flex-shrink-0" />
-              {!collapsed && <span>{item.label}</span>}
+              {isActive && (
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-primary rounded-r-full shadow-[0_0_12px_hsl(var(--primary)/0.6)] z-10"
+                />
+              )}
+              <Icon className={cn('w-5 h-5 flex-shrink-0 relative z-10 transition-transform duration-200', 'group-hover:scale-110')} />
+              {!collapsed && <span className="relative z-10">{item.label}</span>}
             </NavLink>
           );
         })}
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-border/50">
+      <div className="relative p-4 border-t border-sidebar-border/60">
         <button
           onClick={() => signOut()}
           className={cn(
-            'flex items-center gap-3 w-full px-4 py-3 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors',
+            'flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-sm font-medium text-muted-foreground',
+            'hover:text-destructive hover:bg-destructive/10 transition-colors active:scale-[0.98]',
             collapsed && 'justify-center'
           )}
+          aria-label="Sair da conta"
         >
           <LogOut className="w-5 h-5" />
           {!collapsed && <span>Sair</span>}

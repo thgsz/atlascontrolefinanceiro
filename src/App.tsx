@@ -68,11 +68,11 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={location.pathname}
-        initial={{ opacity: 0, filter: "blur(3px)" }}
-        animate={{ opacity: 1, filter: "blur(0px)" }}
-        exit={{ opacity: 0, filter: "blur(3px)" }}
-        transition={{ duration: 0.15, ease: "easeOut" }}
-        style={{ willChange: "opacity, filter" }}
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -2 }}
+        transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+        style={{ willChange: "opacity, transform" }}
       >
         <Suspense fallback={null}>
           <Routes location={location}>
