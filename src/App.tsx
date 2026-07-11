@@ -17,6 +17,7 @@ const Analytics = lazy(() => import("./pages/Analytics"));
 const Settings = lazy(() => import("./pages/Settings"));
 const SubscriptionsPage = lazy(() => import("./pages/SubscriptionsPage"));
 const InstallmentsPage = lazy(() => import("./pages/InstallmentsPage"));
+const Investments = lazy(() => import("./pages/Investments"));
 const Auth = lazy(() => import("./pages/Auth"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -86,6 +87,7 @@ function AnimatedRoutes() {
       <Route path="/categories" element={<ProtectedRoute><Categories /></ProtectedRoute>} />
       <Route path="/subscriptions" element={<ProtectedRoute><SubscriptionsPage /></ProtectedRoute>} />
       <Route path="/installments" element={<ProtectedRoute><InstallmentsPage /></ProtectedRoute>} />
+      <Route path="/investments" element={<ProtectedRoute><Investments /></ProtectedRoute>} />
       <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
       <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />

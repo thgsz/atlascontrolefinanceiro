@@ -13,6 +13,7 @@ import {
   ChevronRight,
   CreditCard,
   CalendarRange,
+  LineChart,
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth-context';
 import { useState } from 'react';
@@ -23,6 +24,7 @@ const navItems = [
   { path: '/categories', icon: Tags, label: 'Categorias' },
   { path: '/subscriptions', icon: CreditCard, label: 'Assinaturas' },
   { path: '/installments', icon: CalendarRange, label: 'Parcelas' },
+  { path: '/investments', icon: LineChart, label: 'Investimentos' },
   { path: '/analytics', icon: BarChart3, label: 'Análises' },
   { path: '/settings', icon: Settings, label: 'Configurações' },
 ];
