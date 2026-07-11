@@ -126,6 +126,107 @@ export type Database = {
           },
         ]
       }
+      investment_assets: {
+        Row: {
+          asset_type: Database["public"]["Enums"]["investment_asset_type"]
+          average_price: number
+          created_at: string
+          current_price: number | null
+          id: string
+          institution: string
+          invested_amount: number
+          name: string
+          notes: string | null
+          purchase_date: string | null
+          quantity: number
+          ticker: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          asset_type: Database["public"]["Enums"]["investment_asset_type"]
+          average_price?: number
+          created_at?: string
+          current_price?: number | null
+          id?: string
+          institution?: string
+          invested_amount?: number
+          name: string
+          notes?: string | null
+          purchase_date?: string | null
+          quantity?: number
+          ticker?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          asset_type?: Database["public"]["Enums"]["investment_asset_type"]
+          average_price?: number
+          created_at?: string
+          current_price?: number | null
+          id?: string
+          institution?: string
+          invested_amount?: number
+          name?: string
+          notes?: string | null
+          purchase_date?: string | null
+          quantity?: number
+          ticker?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      investment_movements: {
+        Row: {
+          asset_id: string
+          created_at: string
+          id: string
+          movement_date: string
+          movement_type: Database["public"]["Enums"]["investment_movement_type"]
+          notes: string | null
+          quantity: number
+          total_amount: number
+          unit_price: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          asset_id: string
+          created_at?: string
+          id?: string
+          movement_date?: string
+          movement_type: Database["public"]["Enums"]["investment_movement_type"]
+          notes?: string | null
+          quantity?: number
+          total_amount?: number
+          unit_price?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          asset_id?: string
+          created_at?: string
+          id?: string
+          movement_date?: string
+          movement_type?: Database["public"]["Enums"]["investment_movement_type"]
+          notes?: string | null
+          quantity?: number
+          total_amount?: number
+          unit_price?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "investment_movements_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "investment_assets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -359,6 +460,35 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      investment_asset_type:
+        | "tesouro_direto"
+        | "cdb"
+        | "lci"
+        | "lca"
+        | "cri"
+        | "cra"
+        | "debentures"
+        | "acoes"
+        | "fiis"
+        | "etfs"
+        | "bdrs"
+        | "exterior"
+        | "cripto"
+        | "previdencia"
+        | "fundos"
+        | "ouro"
+        | "caixa"
+        | "outros"
+      investment_movement_type:
+        | "aporte"
+        | "compra"
+        | "venda"
+        | "dividendo"
+        | "jcp"
+        | "rendimento"
+        | "bonificacao"
+        | "desdobramento"
+        | "agrupamento"
       subscription_plan: "free" | "pro"
       transaction_type: "income" | "expense"
     }
@@ -488,6 +618,37 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      investment_asset_type: [
+        "tesouro_direto",
+        "cdb",
+        "lci",
+        "lca",
+        "cri",
+        "cra",
+        "debentures",
+        "acoes",
+        "fiis",
+        "etfs",
+        "bdrs",
+        "exterior",
+        "cripto",
+        "previdencia",
+        "fundos",
+        "ouro",
+        "caixa",
+        "outros",
+      ],
+      investment_movement_type: [
+        "aporte",
+        "compra",
+        "venda",
+        "dividendo",
+        "jcp",
+        "rendimento",
+        "bonificacao",
+        "desdobramento",
+        "agrupamento",
+      ],
       subscription_plan: ["free", "pro"],
       transaction_type: ["income", "expense"],
     },
