@@ -1,4 +1,5 @@
 import { supabase } from '@/integrations/supabase/client';
+import type { Database } from '@/integrations/supabase/types';
 import type { CacheEntry, MarketProvider, MarketQuote } from './types';
 import { DEFAULT_CACHE_TTL_MS } from './types';
 
@@ -41,7 +42,8 @@ export async function writeCache(
 ): Promise<void> {
   if (!quotes.length) return;
   const now = Date.now();
-  const rows = quotes.map((q) => ({
+  type Row = Database['public']['Tables']['market_price_cache']['Insert'];
+  const rows: Row[] = quotes.map((q) => ({
     user_id: userId,
     provider: q.provider,
     identifier: q.identifier,
@@ -49,7 +51,7 @@ export async function writeCache(
     price: q.price,
     fetched_at: q.fetchedAt,
     expires_at: new Date(now + ttlMs).toISOString(),
-    raw: (q.raw as unknown as null) ?? null,
+    raw: (q.raw as Row['raw']) ?? null,
   }));
   await supabase
     .from('market_price_cache')
