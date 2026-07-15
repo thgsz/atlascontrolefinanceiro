@@ -49,7 +49,7 @@ export async function writeCache(
     price: q.price,
     fetched_at: q.fetchedAt,
     expires_at: new Date(now + ttlMs).toISOString(),
-    raw: (q.raw as object) ?? null,
+    raw: (q.raw as unknown as null) ?? null,
   }));
   await supabase
     .from('market_price_cache')
