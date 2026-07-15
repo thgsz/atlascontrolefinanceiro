@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/lib/auth-context';
 import type { Database } from '@/integrations/supabase/types';
+import { deriveAssetIdentifier, suggestMarket, suggestProvider } from '@/lib/market';
 
 export type InvestmentAsset = Database['public']['Tables']['investment_assets']['Row'];
 export type InvestmentAssetInsert = Database['public']['Tables']['investment_assets']['Insert'];
@@ -54,9 +55,10 @@ export function useCreateAsset() {
   return useMutation({
     mutationFn: async (payload: Omit<InvestmentAssetInsert, 'user_id'>) => {
       if (!user) throw new Error('Not authenticated');
+      const enriched = enrichAssetPayload(payload);
       const { data, error } = await supabase
         .from('investment_assets')
-        .insert({ ...payload, user_id: user.id })
+        .insert({ ...enriched, user_id: user.id })
         .select()
         .single();
       if (error) throw error;
@@ -70,9 +72,10 @@ export function useUpdateAsset() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async ({ id, ...updates }: InvestmentAssetUpdate & { id: string }) => {
+      const enriched = enrichAssetPayload(updates);
       const { data, error } = await supabase
         .from('investment_assets')
-        .update(updates)
+        .update(enriched)
         .eq('id', id)
         .select()
         .single();
@@ -81,6 +84,34 @@ export function useUpdateAsset() {
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['investment_assets'] }),
   });
+}
+
+/**
+ * Fill API-ready fields (asset_identifier, market_provider, market) from the
+ * user-facing fields whenever they aren't set explicitly. Invisible to the UI —
+ * enables future automatic sync without touching manual data.
+ */
+function enrichAssetPayload<T extends Partial<InvestmentAssetInsert>>(payload: T): T {
+  const out: T = { ...payload };
+  const assetType = out.asset_type;
+  const ticker = out.ticker;
+  if (assetType) {
+    if (!out.asset_identifier && ticker) {
+      const id = deriveAssetIdentifier(assetType, ticker);
+      if (id) out.asset_identifier = id;
+    }
+    if (!out.market) {
+      const m = suggestMarket(assetType);
+      if (m) out.market = m;
+    }
+    if (!out.market_provider) {
+      // Keep manual as default so nothing auto-syncs before the user opts in.
+      out.market_provider = 'manual';
+    }
+    // Hint for future auto-sync — stored but unused today.
+    void suggestProvider;
+  }
+  return out;
 }
 
 export function useDeleteAsset() {

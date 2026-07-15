@@ -128,49 +128,82 @@ export type Database = {
       }
       investment_assets: {
         Row: {
+          asset_identifier: string | null
           asset_type: Database["public"]["Enums"]["investment_asset_type"]
+          auto_sync_enabled: boolean
           average_price: number
+          cache_expires_at: string | null
           created_at: string
+          currency: string
           current_price: number | null
           id: string
           institution: string
           invested_amount: number
+          last_sync_attempt_at: string | null
+          last_synced_at: string | null
+          last_synced_price: number | null
+          market: string | null
+          market_provider: Database["public"]["Enums"]["market_provider"]
           name: string
           notes: string | null
           purchase_date: string | null
           quantity: number
+          sync_error: string | null
+          sync_status: Database["public"]["Enums"]["sync_status"]
           ticker: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          asset_identifier?: string | null
           asset_type: Database["public"]["Enums"]["investment_asset_type"]
+          auto_sync_enabled?: boolean
           average_price?: number
+          cache_expires_at?: string | null
           created_at?: string
+          currency?: string
           current_price?: number | null
           id?: string
           institution?: string
           invested_amount?: number
+          last_sync_attempt_at?: string | null
+          last_synced_at?: string | null
+          last_synced_price?: number | null
+          market?: string | null
+          market_provider?: Database["public"]["Enums"]["market_provider"]
           name: string
           notes?: string | null
           purchase_date?: string | null
           quantity?: number
+          sync_error?: string | null
+          sync_status?: Database["public"]["Enums"]["sync_status"]
           ticker?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          asset_identifier?: string | null
           asset_type?: Database["public"]["Enums"]["investment_asset_type"]
+          auto_sync_enabled?: boolean
           average_price?: number
+          cache_expires_at?: string | null
           created_at?: string
+          currency?: string
           current_price?: number | null
           id?: string
           institution?: string
           invested_amount?: number
+          last_sync_attempt_at?: string | null
+          last_synced_at?: string | null
+          last_synced_price?: number | null
+          market?: string | null
+          market_provider?: Database["public"]["Enums"]["market_provider"]
           name?: string
           notes?: string | null
           purchase_date?: string | null
           quantity?: number
+          sync_error?: string | null
+          sync_status?: Database["public"]["Enums"]["sync_status"]
           ticker?: string | null
           updated_at?: string
           user_id?: string
@@ -226,6 +259,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      market_price_cache: {
+        Row: {
+          created_at: string
+          currency: string
+          expires_at: string
+          fetched_at: string
+          id: string
+          identifier: string
+          price: number
+          provider: Database["public"]["Enums"]["market_provider"]
+          raw: Json | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          expires_at?: string
+          fetched_at?: string
+          id?: string
+          identifier: string
+          price: number
+          provider: Database["public"]["Enums"]["market_provider"]
+          raw?: Json | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          expires_at?: string
+          fetched_at?: string
+          id?: string
+          identifier?: string
+          price?: number
+          provider?: Database["public"]["Enums"]["market_provider"]
+          raw?: Json | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -489,7 +564,14 @@ export type Database = {
         | "bonificacao"
         | "desdobramento"
         | "agrupamento"
+      market_provider:
+        | "manual"
+        | "brapi"
+        | "coingecko"
+        | "finnhub"
+        | "alphavantage"
       subscription_plan: "free" | "pro"
+      sync_status: "idle" | "pending" | "success" | "error" | "stale"
       transaction_type: "income" | "expense"
     }
     CompositeTypes: {
@@ -649,7 +731,15 @@ export const Constants = {
         "desdobramento",
         "agrupamento",
       ],
+      market_provider: [
+        "manual",
+        "brapi",
+        "coingecko",
+        "finnhub",
+        "alphavantage",
+      ],
       subscription_plan: ["free", "pro"],
+      sync_status: ["idle", "pending", "success", "error", "stale"],
       transaction_type: ["income", "expense"],
     },
   },
